@@ -1,30 +1,21 @@
-/* 11.4. Zadanie: Pierwsza klasa */
+/* 11.5. Zadanie: użycie "self" */
 
-function Phone(brand, price, color, origin, screan, stock, sales) {
-	this.brand = brand;
-	this.price = price;
-	this.color = color;
-	this.origin = origin;
-	this.screan = screan;
-	this.stock = stock;
-	this.sales = sales;
+function Button(text) {
+	this.text = text || 'Hello';
 }
 
-Phone.prototype.printInfo = function() {
-		console.log("The phone brand is " + this.brand + ", color is " + this.color + ", the price is " + this.price + ", the irigin is " + this.origin + " and screan size is " + this.screan + ".");
+Button.prototype = {
+		create: function() {
+		var self = this;
+		this.$element = $('<button>');
+		this.$element.text(this.text);
+		this.$element.click(function() {
+			alert(self.text);		
+			});
+		this.$element.appendTo($('body'));
+	}
 }
 
-Phone.prototype.printStock = function() {
-		console.log("The phone stock is " + this.stock + " pieces.");
-}
+var btn1 = new Button('Hello!');
 
-Phone.prototype.printSales = function() {
-		console.log("The phone sales was " + this.sales + " pieces last week.");
-}
-
-var iPhone6S = new Phone("Apple", 2250, "silver", "China", "7 inches", "1200", "850");
-
-iPhone6S.printInfo();
-iPhone6S.printStock();
-iPhone6S.printSales();
-	
+btn1.create();
